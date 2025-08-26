@@ -1,0 +1,214 @@
+/* ==== Global & Background ==== */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  background: linear-gradient(to right, #2d0b15, #1a0007); /* rich burgundy to deep plum */
+  color: #fceff2;
+  background-attachment: fixed;
+}
+
+/* ==== Fonts ==== */
+h1, h2, h3, h5 {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+}
+
+/* ==== Navbar ==== */
+.navbar {
+  background: rgba(30, 0, 20, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  color: #ffc6d8;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #f8e0e6;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #ff8fa3;
+}
+
+/* ==== Hero Section ==== */
+.hero {
+  height: 100vh;
+  background: linear-gradient(rgba(90, 20, 40, 0.7), rgba(20, 0, 30, 0.85)),
+              url('https://images.unsplash.com/photo-1604147706288-f94b5ccaa3f9') no-repeat center center;
+  background-size: cover;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 25px 35px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 110, 145, 0.5);
+}
+
+/* ==== Sections ==== */
+section {
+  background: rgba(255, 215, 225, 0.05);
+  margin: 60px 20px;
+  padding: 60px 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+}
+
+/* ==== Services ==== */
+.service-icon {
+  font-size: 2.8rem;
+  color: #ff6f91;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.service-icon:hover {
+  transform: scale(1.25);
+  color: #ffc6d8;
+}
+
+#services h5 {
+  margin-top: 10px;
+  color: #ffe4ec;
+}
+
+/* ==== Gallery ==== */
+.gallery img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  opacity: 0.92;
+}
+
+/* ==== Buttons ==== */
+.btn-custom {
+  background: linear-gradient(135deg, #d94f70, #b76e79);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+  background: linear-gradient(135deg, #b76e79, #a5485a);
+  transform: scale(1.05);
+}
+
+/* ==== Form ==== */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid #b76e79;
+  color: #fff;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+
+.form-control::placeholder {
+  color: #ddd;
+}
+
+.form-control:focus {
+  border-color: #ff6f91;
+  box-shadow: 0 0 8px #ff6f91;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* ==== Contact Section ==== */
+#contact {
+  background: linear-gradient(to right, #2a0e18, #1b0010);
+  color: #fceff2;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-top: 1px solid #44202a;
+}
+
+#contact i {
+  color: #ff6f91;
+}
+
+#contact a {
+  color: #ff9aaa;
+  margin: 0 10px;
+  transition: transform 0.3s, color 0.3s;
+}
+
+#contact a:hover {
+  transform: scale(1.2);
+  color: #ffc6d8;
+}
+
+/* ==== Footer ==== */
+footer {
+  background-color: #140007;
+  padding: 20px 0;
+  color: #ffccd9;
+  font-size: 0.9rem;
+  text-align: center;
+  border-top: 1px solid #2a0e18;
+}
+
+/* ==== Responsive Typography ==== */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+    padding: 15px 20px;
+  }
+
+  section {
+    margin: 40px 10px;
+    padding: 40px 15px;
+  }
+}
+.service-card {
+  perspective: 1000px;
+  width: 100%;
+  height: 200px;
+}
+.card-front, .card-back {
+  transition: transform 0.6s;
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.card-front {
+  transform: rotateY(0deg);
+}
+.card-back {
+  transform: rotateY(180deg);
+  background-color: #ffccd9;
+  color: #2d0b15;
+  padding: 20px;
+}
+.service-card:hover .card-front {
+  transform: rotateY(-180deg);
+}
+.service-card:hover .card-back {
+  transform: rotateY(0deg);
+}
+
+
