@@ -1,50 +1,65 @@
-/* ==== Global & Background ==== */
+/* ===============================
+   GLOBAL & BACKGROUND
+================================ */
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  background: linear-gradient(to right, #2d0b15, #1a0007); /* rich burgundy to deep plum */
-  color: #fceff2;
+  background:
+    radial-gradient(circle at top,
+      rgba(212, 175, 55, 0.12),
+      rgba(0, 0, 0, 0.95) 45%
+    ),
+    linear-gradient(135deg, #000000, #0b0b0b, #000000);
+  color: #f5e6b8;
   background-attachment: fixed;
 }
 
-/* ==== Fonts ==== */
+/* ===============================
+   HEADINGS & TEXT
+================================ */
 h1, h2, h3, h5 {
   font-family: 'Playfair Display', serif;
-  color: #fff;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  color: #d4af37; /* Real gold */
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.85);
 }
 
-/* ==== Navbar ==== */
+/* ===============================
+   NAVBAR
+================================ */
 .navbar {
-  background: rgba(30, 0, 20, 0.85);
+  background: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.9);
 }
 
 .navbar-brand {
   font-size: 2rem;
-  color: #ffc6d8;
+  color: #d4af37;
   font-weight: bold;
 }
 
 .nav-link {
-  color: #f8e0e6;
+  color: #f5e6b8;
   transition: color 0.3s;
 }
 
 .nav-link:hover {
-  color: #ff8fa3;
+  color: #d4af37;
 }
 
-/* ==== Hero Section ==== */
+/* ===============================
+   HERO SECTION
+================================ */
 .hero {
   height: 100vh;
-  background: linear-gradient(rgba(90, 20, 40, 0.7), rgba(20, 0, 30, 0.85)),
-              url('https://images.unsplash.com/photo-1604147706288-f94b5ccaa3f9') no-repeat center center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
+    url('https://images.unsplash.com/photo-1604147706288-f94b5ccaa3f9')
+      no-repeat center center;
   background-size: cover;
-  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,129 +67,125 @@ h1, h2, h3, h5 {
 }
 
 .hero h1 {
-  font-size: 3.5rem;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 25px 35px;
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(255, 110, 145, 0.5);
+  font-size: 3.6rem;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 25px 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
 }
 
-/* ==== Sections ==== */
+/* ===============================
+   SECTIONS
+================================ */
 section {
-  background: rgba(255, 215, 225, 0.05);
+  background: rgba(0, 0, 0, 0.72);
   margin: 60px 20px;
   padding: 60px 20px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  backdrop-filter: blur(4px);
+  border-radius: 18px;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9);
 }
 
-/* ==== Services ==== */
+/* ===============================
+   SERVICES
+================================ */
 .service-icon {
   font-size: 2.8rem;
-  color: #ff6f91;
+  color: #d4af37;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .service-icon:hover {
   transform: scale(1.25);
-  color: #ffc6d8;
+  color: #f5e6b8;
 }
 
-#services h5 {
-  margin-top: 10px;
-  color: #ffe4ec;
-}
-
-/* ==== Gallery ==== */
+/* ===============================
+   GALLERY
+================================ */
 .gallery img {
   width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  border-radius: 14px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.85);
   transition: transform 0.4s ease, opacity 0.3s ease;
 }
 
 .gallery img:hover {
   transform: scale(1.05);
-  opacity: 0.92;
+  opacity: 0.95;
 }
 
-/* ==== Buttons ==== */
+/* ===============================
+   BUTTONS (GOLD METALLIC)
+================================ */
 .btn-custom {
-  background: linear-gradient(135deg, #d94f70, #b76e79);
-  color: white;
+  background: linear-gradient(
+    135deg,
+    #f5e6b8,
+    #d4af37,
+    #b8962e
+  );
+  color: #000;
   border: none;
   padding: 12px;
   border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
   font-weight: bold;
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
   transition: all 0.3s ease;
 }
 
 .btn-custom:hover {
-  background: linear-gradient(135deg, #b76e79, #a5485a);
+  background: linear-gradient(
+    135deg,
+    #fff2c2,
+    #e6c45a,
+    #c9a227
+  );
   transform: scale(1.05);
 }
 
-/* ==== Form ==== */
+/* ===============================
+   FORM INPUTS
+================================ */
 .form-control {
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid #b76e79;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #f5e6b8;
   border-radius: 6px;
-  backdrop-filter: blur(4px);
 }
 
 .form-control::placeholder {
-  color: #ddd;
+  color: #c9b36d;
 }
 
 .form-control:focus {
-  border-color: #ff6f91;
-  box-shadow: 0 0 8px #ff6f91;
-  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #d4af37;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+  background-color: rgba(0, 0, 0, 0.85);
   color: #fff;
 }
 
-/* ==== Contact Section ==== */
-#contact {
-  background: linear-gradient(to right, #2a0e18, #1b0010);
-  color: #fceff2;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  border-top: 1px solid #44202a;
-}
-
-#contact i {
-  color: #ff6f91;
-}
-
-#contact a {
-  color: #ff9aaa;
-  margin: 0 10px;
-  transition: transform 0.3s, color 0.3s;
-}
-
-#contact a:hover {
-  transform: scale(1.2);
-  color: #ffc6d8;
-}
-
-/* ==== Footer ==== */
+/* ===============================
+   FOOTER
+================================ */
 footer {
-  background-color: #140007;
-  padding: 20px 0;
-  color: #ffccd9;
-  font-size: 0.9rem;
+  background-color: #000;
+  padding: 22px 0;
+  color: #d4af37;
+  font-size: 0.95rem;
   text-align: center;
-  border-top: 1px solid #2a0e18;
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
 }
 
-/* ==== Responsive Typography ==== */
+/* ===============================
+   RESPONSIVE
+================================ */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2.5rem;
-    padding: 15px 20px;
+    padding: 18px 24px;
   }
 
   section {
@@ -182,33 +193,85 @@ footer {
     padding: 40px 15px;
   }
 }
+
+/* ===============================
+   OPTIONAL SERVICE CARD (FLIP)
+================================ */
 .service-card {
   perspective: 1000px;
   width: 100%;
   height: 200px;
 }
-.card-front, .card-back {
+
+.card-front,
+.card-back {
   transition: transform 0.6s;
   backface-visibility: hidden;
   position: absolute;
   width: 100%;
   height: 100%;
   text-align: center;
+  border-radius: 12px;
 }
+
 .card-front {
-  transform: rotateY(0deg);
+  background: rgba(0, 0, 0, 0.85);
+  color: #d4af37;
 }
+
 .card-back {
   transform: rotateY(180deg);
-  background-color: #ffccd9;
-  color: #2d0b15;
+  background: linear-gradient(135deg, #d4af37, #b8962e);
+  color: #000;
   padding: 20px;
 }
+
 .service-card:hover .card-front {
   transform: rotateY(-180deg);
 }
+
 .service-card:hover .card-back {
   transform: rotateY(0deg);
 }
+/*/* ===============================
+   GOLD PARTICLES BACKGROUND (LIVELY)
+================================ */
+#gold-particles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
 
+.gold-particle {
+  position: absolute;
+  background: radial-gradient(circle, #fff1b0, #d4af37);
+  border-radius: 50%;
+  opacity: 0.9;
+  animation-name: floatGold, twinkleGold;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.9);
+}
+
+@keyframes floatGold {
+  from {
+    transform: translateY(110vh) translateX(0) scale(0.6);
+  }
+  to {
+    transform: translateY(-15vh) translateX(40px) scale(1.1);
+  }
+}
+
+@keyframes twinkleGold {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Keep content above particles */
+body > *:not(#gold-particles) {
+  position: relative;
+  z-index: 1;
+}
 
