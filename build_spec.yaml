@@ -1,0 +1,10 @@
+version: 0.1
+
+component: build
+
+steps:
+  - type: Command
+    name: Build Step
+    command: |
+      echo "OCI DevOps build started"
+      ls -la
