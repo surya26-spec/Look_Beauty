@@ -3,9 +3,6 @@ version: 0.1
 component: build
 
 steps:
-  # -------------------------------
-  # Install system dependencies (FINAL FIX)
-  # -------------------------------
   - type: Command
     name: Install System Dependencies
     timeoutInSeconds: 600
@@ -30,9 +27,6 @@ steps:
         mesa-libgbm \
         xorg-x11-server-Xvfb
 
-  # -------------------------------
-  # Build step
-  # -------------------------------
   - type: Command
     name: Build Step
     timeoutInSeconds: 600
@@ -40,33 +34,24 @@ steps:
       echo "Build started"
       ls -la
 
-  # -------------------------------
-  # Regression Testing (FINAL)
-  # -------------------------------
   - type: Command
     name: Regression Test
     timeoutInSeconds: 1200
     command: |
       echo "Running regression tests"
 
-      # Install only required packages
       npm install cypress http-server
 
-      # Check Cypress installed
       npx cypress --version
 
-      # Start virtual display
       export DISPLAY=:99
       Xvfb :99 &
 
-      # Start server
       npx http-server . -p 3000 &
       sleep 15
 
-      # Verify server is running
       curl -I http://localhost:3000 || exit 1
 
-      # Run Cypress (MOST STABLE)
-      npx cypress run --browser electron --headless || exit 1
+      npx cypress run --browser electron || exit 1
 
       echo "Regression tests completed"
