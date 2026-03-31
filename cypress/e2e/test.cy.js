@@ -1,16 +1,17 @@
 describe('Regression Test', () => {
 
   it('Loads homepage', () => {
-    cy.visit('/')   // uses baseUrl
+    cy.visit('/')
+    cy.title().should('not.be.empty')
   })
 
   it('Checks page content', () => {
     cy.get('body').should('be.visible')
 
-    // More stable check (case-insensitive alternative)
+    // Case-insensitive check
     cy.contains(/look/i).should('exist')
 
-    // Image validation
+    // Check images exist
     cy.get('img').should('have.length.greaterThan', 0)
   })
 
