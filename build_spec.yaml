@@ -3,17 +3,15 @@ version: 0.1
 component: build
 
 steps:
+  # -------------------------------
+  # 1. Install system dependencies (FIXED)
+  # -------------------------------
   - type: Command
-    name: Install Dependencies
+    name: Install System Dependencies
     timeoutInSeconds: 600
     command: |
-      echo "Installing dependencies"
+      echo "Installing system dependencies"
 
-      # Install Node.js
-      curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
-      yum install -y nodejs
-
-      # Install system libs for Cypress
       yum install -y \
         nss \
         libX11 \
@@ -33,14 +31,19 @@ steps:
         xorg-x11-utils \
         xorg-x11-server-Xvfb
 
+  # -------------------------------
+  # 2. Build step
+  # -------------------------------
   - type: Command
     name: Build Step
+    timeoutInSeconds: 600
     command: |
       echo "Build started"
-      node -v
-      npm -v
       ls -la
 
+  # -------------------------------
+  # 3. Regression Testing (FINAL FIX)
+  # -------------------------------
   - type: Command
     name: Regression Test
     timeoutInSeconds: 1200
@@ -50,18 +53,20 @@ steps:
       # Install dependencies
       npm install cypress http-server --save-dev
 
-      # Start virtual display
+      # Start virtual display (required for Cypress)
       export DISPLAY=:99
       Xvfb :99 &
 
-      # Start server
+      # Start local server
       npx http-server . -p 3000 &
+      
+      echo "Waiting for server..."
       sleep 15
 
-      # Check server
+      # Verify server is running
       curl -I http://localhost:3000 || exit 1
 
-      # Run Cypress (FIXED)
-      npx cypress run --e2e --spec "cypress/e2e/*.cy.js" --headless || exit 1
+      # Run Cypress (FINAL STABLE COMMAND)
+      npx cypress run --browser electron || exit 1
 
       echo "Regression tests completed"
