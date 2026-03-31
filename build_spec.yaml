@@ -4,6 +4,32 @@ component: build
 
 steps:
   - type: Command
+    name: Install System Dependencies
+    timeoutInSeconds: 600
+    command: |
+      echo "Installing system dependencies"
+
+      yum install -y \
+        libX11 \
+        libXcomposite \
+        libXcursor \
+        libXdamage \
+        libXext \
+        libXi \
+        libXtst \
+        libnss \
+        libXScrnSaver \
+        libXrandr \
+        alsa-lib \
+        atk \
+        cups-libs \
+        gtk3 \
+        ipa-gothic-fonts \
+        xorg-x11-fonts-Type1 \
+        xorg-x11-utils \
+        Xvfb
+
+  - type: Command
     name: Build Step
     timeoutInSeconds: 600
     command: |
@@ -16,25 +42,31 @@ steps:
     command: |
       echo "Running regression tests"
 
-      # Initialize project
-      npm init -y
+      # Init project (only if needed)
+      if [ ! -f package.json ]; then
+        npm init -y
+      fi
 
       # Install dependencies
       npm install cypress http-server --save-dev
 
-      # Verify Cypress
+      # Verify Cypress installation
       npx cypress verify
 
-      # Start local server
+      # Start virtual display (FIX FOR OCI)
+      export DISPLAY=:99
+      Xvfb :99 &
+
+      # Start server
       npx http-server . -p 3000 &
       
       echo "Waiting for server..."
       sleep 15
 
-      # Check server is up
+      # Check server
       curl -I http://localhost:3000 || exit 1
 
-      # Run Cypress (HEADLESS FIX)
-      npx cypress run --headless --browser chrome || exit 1
+      # Run Cypress in true headless mode
+      npx cypress run --headless || exit 1
 
       echo "Regression tests completed"
