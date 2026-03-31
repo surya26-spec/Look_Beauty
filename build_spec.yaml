@@ -4,7 +4,7 @@ component: build
 
 steps:
   # -------------------------------
-  # Install system dependencies (FIXED)
+  # Install system dependencies (FINAL FIX)
   # -------------------------------
   - type: Command
     name: Install System Dependencies
@@ -27,9 +27,7 @@ steps:
         atk \
         cups-libs \
         gtk3 \
-        libgbm \
-        xorg-x11-fonts-Type1 \
-        xorg-x11-utils \
+        mesa-libgbm \
         xorg-x11-server-Xvfb
 
   # -------------------------------
@@ -43,7 +41,7 @@ steps:
       ls -la
 
   # -------------------------------
-  # Regression Testing
+  # Regression Testing (FINAL)
   # -------------------------------
   - type: Command
     name: Regression Test
@@ -51,18 +49,24 @@ steps:
     command: |
       echo "Running regression tests"
 
-      npm install cypress http-server --save-dev
+      # Install only required packages
+      npm install cypress http-server
 
+      # Check Cypress installed
       npx cypress --version
 
+      # Start virtual display
       export DISPLAY=:99
       Xvfb :99 &
 
+      # Start server
       npx http-server . -p 3000 &
       sleep 15
 
+      # Verify server is running
       curl -I http://localhost:3000 || exit 1
 
+      # Run Cypress (MOST STABLE)
       npx cypress run --browser electron || exit 1
 
       echo "Regression tests completed"
