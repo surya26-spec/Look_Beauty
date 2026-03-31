@@ -7,14 +7,15 @@ describe('Regression Test', () => {
 
   it('Checks page content', () => {
 
-    // wait for page fully load
     cy.get('body', { timeout: 15000 }).should('be.visible')
 
-    // wait for navbar text (most stable element)
-    cy.contains('Look Beauty Studio', { timeout: 15000 }).should('exist')
+    // ✅ FIXED (most stable)
+    cy.get('.navbar-brand', { timeout: 15000 })
+      .should('contain', 'Look Beauty')
 
-    // safer image check (not strict count)
-    cy.get('img', { timeout: 15000 }).should('have.length.greaterThan', 0)
+    // ✅ safe image check
+    cy.get('img', { timeout: 15000 })
+      .should('have.length.greaterThan', 0)
 
   })
 
