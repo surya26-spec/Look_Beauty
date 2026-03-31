@@ -4,12 +4,18 @@ component: build
 
 steps:
   - type: Command
-    name: Install System Dependencies
+    name: Install Dependencies
     timeoutInSeconds: 600
     command: |
-      echo "Installing system dependencies"
+      echo "Installing system + node dependencies"
 
+      # Install Node.js (IMPORTANT FIX)
+      curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
+      yum install -y nodejs
+
+      # Install required libraries for Cypress
       yum install -y \
+        nss \
         libX11 \
         libXcomposite \
         libXcursor \
@@ -17,23 +23,22 @@ steps:
         libXext \
         libXi \
         libXtst \
-        libnss \
         libXScrnSaver \
         libXrandr \
         alsa-lib \
         atk \
         cups-libs \
         gtk3 \
-        ipa-gothic-fonts \
         xorg-x11-fonts-Type1 \
         xorg-x11-utils \
-        Xvfb
+        xorg-x11-server-Xvfb
 
   - type: Command
     name: Build Step
-    timeoutInSeconds: 600
     command: |
       echo "Build started"
+      node -v
+      npm -v
       ls -la
 
   - type: Command
@@ -42,31 +47,21 @@ steps:
     command: |
       echo "Running regression tests"
 
-      # Init project (only if needed)
-      if [ ! -f package.json ]; then
-        npm init -y
-      fi
-
       # Install dependencies
       npm install cypress http-server --save-dev
 
-      # Verify Cypress installation
-      npx cypress verify
-
-      # Start virtual display (FIX FOR OCI)
+      # Start virtual display
       export DISPLAY=:99
       Xvfb :99 &
 
       # Start server
       npx http-server . -p 3000 &
-      
-      echo "Waiting for server..."
       sleep 15
 
-      # Check server
+      # Verify server
       curl -I http://localhost:3000 || exit 1
 
-      # Run Cypress in true headless mode
-      npx cypress run --headless || exit 1
+      # Run Cypress (most stable flags)
+      npx cypress run --headless --no-sandbox --disable-gpu || exit 1
 
       echo "Regression tests completed"
