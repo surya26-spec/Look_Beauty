@@ -2,26 +2,22 @@ version: 0.1
 
 component: build
 
-phases:
-  build:
-    commands:
-      - echo "Build started"
-      - ls -la
+steps:
+  - type: Command
+    name: Build and Regression Test
+    command: |
+      echo "Build started"
+      ls -la
 
-  test:
-    commands:
-      - echo "Running regression tests"
-      - npm install
-      - npm install -g serve
-      - serve . -l 3000 &
-      - sleep 10
-      - npx cypress run || exit 1
+      echo "Installing dependencies"
+      npm install
 
-artifacts:
-  - name: web-app
-    type: GENERIC
-    files:
-      - "*.html"
-      - "*.css"
-      - "*.js"
-      - "*.jpg"
+      echo "Installing serve"
+      npm install -g serve
+
+      echo "Starting server"
+      serve . -l 3000 &
+      sleep 10
+
+      echo "Running Cypress tests"
+      npx cypress run || exit 1
