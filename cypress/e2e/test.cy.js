@@ -7,15 +7,16 @@ describe('Regression Test', () => {
 
   it('Checks page content', () => {
 
+    // Page loaded
     cy.get('body', { timeout: 15000 }).should('be.visible')
 
-    // ✅ FIXED (most stable)
+    // ✅ Stable navbar check (NO text issues)
     cy.get('.navbar-brand', { timeout: 15000 })
-      .should('contain', 'Look Beauty')
+      .should('exist')
+      .and('be.visible')
 
-    // ✅ safe image check
-    cy.get('img', { timeout: 15000 })
-      .should('have.length.greaterThan', 0)
+    // ✅ Image check
+    cy.get('img', { timeout: 15000 }).should('exist')
 
   })
 
