@@ -11,18 +11,11 @@ phases:
   test:
     commands:
       - echo "Running regression tests"
-
-      # Check required files exist
-      - test -f index.html || exit 1
-      - test -f style.css || exit 1
-      - test -f script.js || exit 1
-
-      # Basic HTML validation (optional)
-      - echo "Basic validation passed"
-
-  post_build:
-    commands:
-      - echo "Preparing artifacts"
+      - npm install
+      - npm install -g serve
+      - serve . -l 3000 &
+      - sleep 10
+      - npx cypress run || exit 1
 
 artifacts:
   - name: web-app
