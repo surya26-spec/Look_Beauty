@@ -4,20 +4,37 @@ component: build
 
 steps:
   - type: Command
-    name: Build and Regression Test
+    name: Build Step
+    timeoutInSeconds: 600
     command: |
       echo "Build started"
       ls -la
 
-      echo "Installing dependencies"
-      npm install
+  - type: Command
+    name: Regression Test
+    timeoutInSeconds: 1200
+    command: |
+      echo "Running regression tests"
 
-      echo "Installing serve"
-      npm install -g serve
+      # Initialize Node project
+      npm init -y
 
-      echo "Starting server"
-      serve . -l 3000 &
-      sleep 10
+      # Install dependencies (clean + stable)
+      npm install cypress http-server --save-dev
 
-      echo "Running Cypress tests"
-      npx cypress run || exit 1
+      # Verify Cypress installation
+      npx cypress verify
+
+      # Start local server
+      npx http-server . -p 3000 &
+      
+      echo "Waiting for server to start..."
+      sleep 15
+
+      # Check if server is running
+      curl -I http://localhost:3000 || exit 1
+
+      # Run Cypress tests
+      npx cypress run --browser chrome || exit 1
+
+      echo "Regression tests completed"
