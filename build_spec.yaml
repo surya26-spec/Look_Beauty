@@ -9,9 +9,11 @@ steps:
     command: |
       echo "Installing dependencies"
 
+      # Install Node.js
       curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
       yum install -y nodejs
 
+      # Install system libs for Cypress
       yum install -y \
         nss \
         libX11 \
@@ -45,17 +47,21 @@ steps:
     command: |
       echo "Running regression tests"
 
+      # Install dependencies
       npm install cypress http-server --save-dev
 
+      # Start virtual display
       export DISPLAY=:99
       Xvfb :99 &
 
+      # Start server
       npx http-server . -p 3000 &
       sleep 15
 
+      # Check server
       curl -I http://localhost:3000 || exit 1
 
-      # 🔥 FIXED COMMAND
+      # Run Cypress (FIXED)
       npx cypress run --e2e --spec "cypress/e2e/*.cy.js" --headless || exit 1
 
       echo "Regression tests completed"
