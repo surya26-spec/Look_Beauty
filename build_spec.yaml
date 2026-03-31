@@ -16,25 +16,25 @@ steps:
     command: |
       echo "Running regression tests"
 
-      # Initialize Node project
+      # Initialize project
       npm init -y
 
-      # Install dependencies (clean + stable)
+      # Install dependencies
       npm install cypress http-server --save-dev
 
-      # Verify Cypress installation
+      # Verify Cypress
       npx cypress verify
 
       # Start local server
       npx http-server . -p 3000 &
       
-      echo "Waiting for server to start..."
+      echo "Waiting for server..."
       sleep 15
 
-      # Check if server is running
+      # Check server is up
       curl -I http://localhost:3000 || exit 1
 
-      # Run Cypress tests
-      npx cypress run --browser chrome || exit 1
+      # Run Cypress (HEADLESS FIX)
+      npx cypress run --headless --browser chrome || exit 1
 
       echo "Regression tests completed"
