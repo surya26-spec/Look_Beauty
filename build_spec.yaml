@@ -7,13 +7,11 @@ steps:
     name: Install Dependencies
     timeoutInSeconds: 600
     command: |
-      echo "Installing system + node dependencies"
+      echo "Installing dependencies"
 
-      # Install Node.js (IMPORTANT FIX)
       curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
       yum install -y nodejs
 
-      # Install required libraries for Cypress
       yum install -y \
         nss \
         libX11 \
@@ -47,21 +45,17 @@ steps:
     command: |
       echo "Running regression tests"
 
-      # Install dependencies
       npm install cypress http-server --save-dev
 
-      # Start virtual display
       export DISPLAY=:99
       Xvfb :99 &
 
-      # Start server
       npx http-server . -p 3000 &
       sleep 15
 
-      # Verify server
       curl -I http://localhost:3000 || exit 1
 
-      # Run Cypress (most stable flags)
-      npx cypress run --headless --no-sandbox --disable-gpu || exit 1
+      # 🔥 FIXED COMMAND
+      npx cypress run --e2e --spec "cypress/e2e/*.cy.js" --headless || exit 1
 
       echo "Regression tests completed"
