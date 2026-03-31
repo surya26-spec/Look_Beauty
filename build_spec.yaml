@@ -67,6 +67,6 @@ steps:
       curl -I http://localhost:3000 || exit 1
 
       # Run Cypress (MOST STABLE)
-      npx cypress run --browser electron || exit 1
+      npx cypress run --browser electron --headless || exit 1
 
       echo "Regression tests completed"
